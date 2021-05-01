@@ -1,15 +1,27 @@
-
+import React, { useEffect, useState } from "react";
 import Header from './Header';
 import Main from './Main'
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import PopupWithImage from './PopupWithImage';
-import React, { useEffect, useState } from "react";
+import api from '../utils/api';
+import test from '../utils/constants';
+
 
 function App() {
+
+useEffect(() => {
+    api.getUser()
+      .then((user) => console.log(user))
+  })
+ 
+  /* const [userName, setUserName] = useState(''); */
+  
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+
+  
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -29,10 +41,12 @@ function App() {
     setIsAddPlacePopupOpen(false);
   }
 
+/*   userName={} userDescription={} userAvatar={} */
+
   return (
     <div>
       <Header />
-      <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} />
+      <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick}  />
       <Footer />
       <PopupWithForm name="profile" title="Редактировать профиль" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
         <section className="popup__input-section">
