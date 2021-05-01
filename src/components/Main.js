@@ -1,19 +1,19 @@
 import addButton from '../images/__add-button.svg';
 
-function Main({onEditProfile, onAddPlace, onEditAvatar}) {
+function Main({onEditProfile, onAddPlace, onEditAvatar, userName, userAvatar, userDescription}) {
   return (
     <main>
     <section className="profile">
       <div className="user">
         <div className="user-photo" onClick={onEditAvatar}>
-          <img className="user__avatar" src="#" alt="фото пользователя" title="фото пользователя"  /> 
+          <img className="user__avatar" src={userAvatar} alt="фото пользователя" title="фото пользователя"  /> 
         </div>
         <div className="user__profile-info">
           <div className="user__name-block">
-            <h1 className="user__name">Ксения Стойчикова</h1>
+            <h1 className="user__name">{userName}</h1>
             <button className="user__edit-button" type="submit" aria-label="edit" onClick={onEditProfile} ></button>
           </div>    
-          <p className="user__about">Исследователь</p>
+          <p className="user__about">{userDescription}</p>
         </div>
       </div>
       

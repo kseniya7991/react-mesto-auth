@@ -11,10 +11,7 @@ const handleResponse = (res) => {
       this._groupID = groupID;
     }
     
-    test() {
-        console.log('asdasd')
-    }
-
+ 
     getUser() {
       return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/users/me`, {
         headers: {

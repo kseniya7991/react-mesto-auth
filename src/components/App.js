@@ -5,18 +5,42 @@ import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import PopupWithImage from './PopupWithImage';
 import api from '../utils/api';
-import test from '../utils/constants';
-
+import Card from './Card';
 
 function App() {
-
-useEffect(() => {
-    api.getUser()
-      .then((user) => console.log(user))
-  })
- 
-  /* const [userName, setUserName] = useState(''); */
   
+   
+  const [userName, setUserName] = useState('');
+  const [userAvatar, setUserAvatar] = useState('');
+  const [userDescription, setUserDescription] = useState('');
+
+  useEffect(() => {
+     /*   api.getUser()
+        .then((userData) => {
+          setUserName(userData.name);
+          setUserAvatar(userData.avatar);
+          setUserDescription(userData.about);
+        })
+        .catch((err) => {
+          console.log(err);
+        }); */
+
+      api.getCards()
+        .then(data => 
+          setCards(data.map(item => ({
+              title: item.name,
+              photo: item.link,
+              alt: item.name,
+              likes: item.likes.length,
+              id: item._id
+            })))  
+        )
+        /* .catch((err) => {
+          console.log(err);
+        }); */
+  }, [])
+
+  const [cards, setCards] = useState([]);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -41,12 +65,23 @@ useEffect(() => {
     setIsAddPlacePopupOpen(false);
   }
 
-/*   userName={} userDescription={} userAvatar={} */
+/*   userName={userName}  userAvatar={userAvatar} userDescription={userDescription} */
 
   return (
     <div>
       <Header />
-      <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick}  />
+      <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick}  userName={userName}  userAvatar={userAvatar} userDescription={userDescription}/>
+      
+      <div>
+        {/* {console.log(cards)} */}
+        {cards.map(({id, ...card}) => console.log({...card}))}
+        {cards.map(({id, ...card}) => <Card key={id} {...card} />)}
+      </div>
+
+      {/* <template className="template"></template> */}
+
+    
+
       <Footer />
       <PopupWithForm name="profile" title="Редактировать профиль" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
         <section className="popup__input-section">
@@ -84,21 +119,7 @@ useEffect(() => {
         </section>
         <button type="submit" formTarget="_self" className="popup__save-button popup__save-button_update-avatar" aria-label="save" value="Сохранить">Сохранить</button>
       </PopupWithForm>
-
-      <template className="template">
-        <li className="photo">
-          <img className="photo__img" alt="#" src="#" />
-          <div className="photo__description">
-            <h2 className="photo__title"></h2>
-            <div className="photo__like-wrapper">
-              <button className="photo__like" type="button" aria-label="like"></button>
-              <span className="photo__like-counter"></span>
-            </div>
-          </div>
-          <button className="photo__delete photo__delete_inactive" type="button" aria-label="delete"></button>
-        </li>
-      </template>
-    </div>
+      </div>
   );
 }
 
