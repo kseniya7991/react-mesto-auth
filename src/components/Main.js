@@ -3,31 +3,46 @@ import addButton from '../images/__add-button.svg';
 function Main() {
   return (
     <main>
-    <section class="profile">
-      <div class="user">
-        <div class="user-photo">
-          <img class="user__avatar" src="#" alt="фото пользователя" title="фото пользователя" /> 
+    <section className="profile">
+      <div className="user">
+        <div className="user-photo" onClick={handleEditAvatarClick}>
+          <img className="user__avatar" src="#" alt="фото пользователя" title="фото пользователя"  /> 
         </div>
-        <div class="user__profile-info">
-          <div class="user__name-block">
-            <h1 class="user__name">Ксения Стойчикова</h1>
-            <button class="user__edit-button" type="submit" aria-label="edit"></button>
+        <div className="user__profile-info">
+          <div className="user__name-block">
+            <h1 className="user__name">Ксения Стойчикова</h1>
+            <button className="user__edit-button" type="submit" aria-label="edit" onClick={handleEditProfileClick} ></button>
           </div>    
-          <p class="user__about">Исследователь</p>
+          <p className="user__about">Исследователь</p>
         </div>
       </div>
       
-      <button class="add-button" type="button">
-         <img src={addButton} class="add-button__image"  alt="кнопка" title="кнопка" />
+      <button className="add-button" type="button" onClick={handleAddPlaceClick} >
+         <img src={addButton} className="add-button__image"  alt="кнопка" title="кнопка" />
       </button>
     </section>
 
-    <section class="photo-tape">
-      <ul class="photos-grid">
+    <section className="photo-tape">
+      <ul className="photos-grid">
       </ul>
     </section>
   </main>
   );
+}
+
+function handleEditAvatarClick() {
+  const popupEditAvatar = document.querySelector('.popup_update-avatar')
+  popupEditAvatar.classList.add('popup_opened');
+}
+
+function handleEditProfileClick() {
+  const popupEditAvatar = document.querySelector('.popup_profile')
+  popupEditAvatar.classList.add('popup_opened');
+}
+
+function handleAddPlaceClick() {
+  const popupEditAvatar = document.querySelector('.popup_add')
+  popupEditAvatar.classList.add('popup_opened');
 }
 
 export default Main;

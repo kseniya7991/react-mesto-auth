@@ -1,7 +1,7 @@
 
 function Footer() {
   return (
-    <footer class="footer">
+    <footer className="footer">
         &copy; 2021 Mesto Russia
     </footer>
   );
