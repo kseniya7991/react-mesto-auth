@@ -1,5 +1,4 @@
 import React from 'react';
-import { isCompositeComponentWithType } from 'react-dom/test-utils';
 
 function Card({ title, photo, alt, likes }) {
     return (

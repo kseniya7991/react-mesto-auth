@@ -8,36 +8,36 @@ import api from '../utils/api';
 import Card from './Card';
 
 function App() {
-  
-   
+
+
   const [userName, setUserName] = useState('');
   const [userAvatar, setUserAvatar] = useState('');
   const [userDescription, setUserDescription] = useState('');
 
   useEffect(() => {
-     /*   api.getUser()
-        .then((userData) => {
-          setUserName(userData.name);
-          setUserAvatar(userData.avatar);
-          setUserDescription(userData.about);
-        })
-        .catch((err) => {
-          console.log(err);
-        }); */
+    api.getUser()
+      .then((userData) => {
+        setUserName(userData.name);
+        setUserAvatar(userData.avatar);
+        setUserDescription(userData.about);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-      api.getCards()
-        .then(data => 
-          setCards(data.map(item => ({
-              title: item.name,
-              photo: item.link,
-              alt: item.name,
-              likes: item.likes.length,
-              id: item._id
-            })))  
-        )
-        /* .catch((err) => {
-          console.log(err);
-        }); */
+    api.getCards()
+      .then(data =>
+        setCards(data.map(item => ({
+          title: item.name,
+          photo: item.link,
+          alt: item.name,
+          likes: item.likes.length,
+          id: item._id
+        })))
+      )
+      .catch((err) => {
+        console.log(err);
+      });
   }, [])
 
   const [cards, setCards] = useState([]);
@@ -45,42 +45,39 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
 
-  
+
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
   }
-  
+
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
   }
-  
+
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
   }
-  
+
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
   }
 
-/*   userName={userName}  userAvatar={userAvatar} userDescription={userDescription} */
+  /*   userName={userName}  userAvatar={userAvatar} userDescription={userDescription} */
 
   return (
     <div>
       <Header />
-      <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick}  userName={userName}  userAvatar={userAvatar} userDescription={userDescription}/>
-      
-      <div>
-        {/* {console.log(cards)} */}
-        {cards.map(({id, ...card}) => console.log({...card}))}
-        {cards.map(({id, ...card}) => <Card key={id} {...card} />)}
-      </div>
+      <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} userName={userName} userAvatar={userAvatar} userDescription={userDescription} />
+      <section className="photo-tape">
+        <div className='photos-grid'>
+          {cards.map(({ id, ...card }) => <Card key={id} {...card} />)}
+        </div>
+      </section>
 
-      {/* <template className="template"></template> */}
 
-    
 
       <Footer />
       <PopupWithForm name="profile" title="Редактировать профиль" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
@@ -112,14 +109,14 @@ function App() {
         <button type="submit" formTarget="_self" className="popup__save-button popup__save-button_delete-card" aria-label="save" value="Да">Да</button>
       </PopupWithForm>
 
-      <PopupWithForm name="update-avatar" title="Обновить аватар" isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}> 
+      <PopupWithForm name="update-avatar" title="Обновить аватар" isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
         <section className="popup__input-section">
           <input className="popup__input popup__input_link_avatar" id="link-avatar" name="AvatarLink" type="url" placeholder="Ссылка на фото" required />
           <span className="popup__input-error" id="link-avatar-error"></span>
         </section>
         <button type="submit" formTarget="_self" className="popup__save-button popup__save-button_update-avatar" aria-label="save" value="Сохранить">Сохранить</button>
       </PopupWithForm>
-      </div>
+    </div>
   );
 }
 

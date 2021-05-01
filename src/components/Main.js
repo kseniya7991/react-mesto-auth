@@ -21,11 +21,6 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, userName, userAvatar, us
          <img src={addButton} className="add-button__image"  alt="кнопка" title="кнопка" />
       </button>
     </section>
-
-    <section className="photo-tape">
-      <ul className="photos-grid">
-      </ul>
-    </section>
   </main>
   );
 }
