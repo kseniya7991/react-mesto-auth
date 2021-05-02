@@ -1,3 +1,5 @@
+import React from 'react';
+
 function PopupWithForm({ title, name, children, isOpen, onClose}) {
     return (
         <section className={`popup popup_${name}` + (isOpen ? ' popup_opened' : '')}>

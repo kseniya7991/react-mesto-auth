@@ -38,7 +38,7 @@ const handleResponse = (res) => {
         });
     }
   
-    /* sendUser({ name, about } = userData) {
+      sendUser({ name, about } ) {
       return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/users/me`, {
         method: 'PATCH',
         headers: {
@@ -56,7 +56,7 @@ const handleResponse = (res) => {
         });
     }
   
-    addCard({ Title, Link } = cardData) {
+    addCard({ Title, Link }) {
       return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/cards`, {
         method: 'POST',
         headers: { authorization: this._token, 'Content-Type': 'application/json' },
@@ -69,7 +69,7 @@ const handleResponse = (res) => {
         .catch((err) => {
           console.log(err);
         });
-    } */
+    }  
   
     removeCard(idCard) {
       return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/cards/${idCard}`, {

@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Card({ title, photo, alt, likes }) {
+function Card({ title, link, alt, likes, onCardClick }) {
     return (
         <li className="photo">
-            <img className="photo__img" alt={alt} src={photo} />
+            <img className="photo__img" alt={alt} src={link} onClick={handleClick}/>
             <div className="photo__description">
                 <h2 className="photo__title">{title}</h2>
                 <div className="photo__like-wrapper">
@@ -14,5 +14,9 @@ function Card({ title, photo, alt, likes }) {
             <button className="photo__delete photo__delete_inactive" type="button" aria-label="delete"></button>
         </li> 
     )
+
+    function handleClick() {
+        onCardClick({title, link});
+      }  
 }
 export default Card;

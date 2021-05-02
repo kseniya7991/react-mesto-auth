@@ -1,6 +1,8 @@
+import React from 'react';
 import addButton from '../images/__add-button.svg';
+import Card from './Card';
 
-function Main({onEditProfile, onAddPlace, onEditAvatar, userName, userAvatar, userDescription}) {
+function Main({onEditProfile, onAddPlace, onEditAvatar, userName, userAvatar, userDescription, cards, onCardClick}) {
   return (
     <main>
     <section className="profile">
@@ -21,23 +23,15 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, userName, userAvatar, us
          <img src={addButton} className="add-button__image"  alt="кнопка" title="кнопка" />
       </button>
     </section>
+
+    <section className="photo-tape">
+        <div className='photos-grid'>
+          {cards.map(({ id, ...card }) => <Card key={id} {...card} onCardClick={onCardClick}/>)}
+        </div>
+      </section>
+
   </main>
   );
 }
-
-/* function handleEditAvatarClick() {
-  const popupEditAvatar = document.querySelector('.popup_update-avatar')
-  popupEditAvatar.classList.add('popup_opened');
-}
-
-function handleEditProfileClick() {
-  const popupEditAvatar = document.querySelector('.popup_profile')
-  popupEditAvatar.classList.add('popup_opened');
-}
-
-function handleAddPlaceClick() {
-  const popupEditAvatar = document.querySelector('.popup_add')
-  popupEditAvatar.classList.add('popup_opened');
-} */
 
 export default Main;

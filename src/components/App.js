@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import Header from './Header';
 import Main from './Main'
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
-import PopupWithImage from './PopupWithImage';
+import ImagePopup from './ImagePopup';
 import api from '../utils/api';
-import Card from './Card';
 
 function App() {
 
@@ -29,10 +28,11 @@ function App() {
       .then(data =>
         setCards(data.map(item => ({
           title: item.name,
-          photo: item.link,
+          link: item.link,
           alt: item.name,
           likes: item.likes.length,
-          id: item._id
+          id: item._id,
+          selectedCard: false,
         })))
       )
       .catch((err) => {
@@ -44,8 +44,7 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
-
-
+  const [selectedCard, setSelectedCard] = useState("");
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -63,23 +62,21 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
+    setSelectedCard("");
   }
 
-  /*   userName={userName}  userAvatar={userAvatar} userDescription={userDescription} */
+  function handleCardClick (card) {
+    setSelectedCard(card)
+  }
 
   return (
     <div>
       <Header />
-      <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} userName={userName} userAvatar={userAvatar} userDescription={userDescription} />
-      <section className="photo-tape">
-        <div className='photos-grid'>
-          {cards.map(({ id, ...card }) => <Card key={id} {...card} />)}
-        </div>
-      </section>
-
-
-
+      <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} userName={userName} userAvatar={userAvatar} userDescription={userDescription} cards={cards} onCardClick={handleCardClick} />
       <Footer />
+
+      <ImagePopup selectedCard={selectedCard} onClose={closeAllPopups} />
+
       <PopupWithForm name="profile" title="Редактировать профиль" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
         <section className="popup__input-section">
           <input className="popup__input popup__input_text_name" id="profile-name" name="name" type="text" placeholder="Ваше имя" minLength="2" maxLength="40" required />
