@@ -7,8 +7,6 @@ import ImagePopup from './ImagePopup';
 import api from '../utils/api';
 
 function App() {
-
-
   const [userName, setUserName] = useState('');
   const [userAvatar, setUserAvatar] = useState('');
   const [userDescription, setUserDescription] = useState('');
@@ -65,7 +63,7 @@ function App() {
     setSelectedCard("");
   }
 
-  function handleCardClick (card) {
+  function handleCardClick(card) {
     setSelectedCard(card)
   }
 
@@ -100,7 +98,6 @@ function App() {
         </section>
         <button type="submit" formTarget="_self" className="popup__save-button popup__save-button_add" aria-label="create" value="Создать">Создать</button>
       </PopupWithForm>
-
 
       <PopupWithForm name="delete-card" title="Вы уверены?" onClose={closeAllPopups}>
         <button type="submit" formTarget="_self" className="popup__save-button popup__save-button_delete-card" aria-label="save" value="Да">Да</button>
