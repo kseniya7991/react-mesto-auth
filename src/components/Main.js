@@ -26,7 +26,7 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, userName, userAvatar, us
 
     <section className="photo-tape">
         <div className='photos-grid'>
-          {cards.map(({ id, ...card }) => <Card key={id} {...card} onCardClick={onCardClick}/>)}
+          {cards.map(({id, ...card }) => <Card key={id} {...card} onCardClick={onCardClick}/>)}
         </div>
       </section>
 
