@@ -105,13 +105,8 @@ function App() {
         </section>
       </PopupWithForm>
 
-<<<<<<< HEAD
-      <PopupWithForm name="delete-card" title="Вы уверены?" onClose={closeAllPopups}>
-        <button type="submit" formTarget="_self" className="popup__save-button popup__save-button_delete-card" aria-label="save" value="Да">Да</button>
-=======
 
       <PopupWithForm name="delete-card" title="Вы уверены?" onClose={closeAllPopups} buttonValue="Да">
->>>>>>> develop
       </PopupWithForm>
 
       <PopupWithForm name="update-avatar" title="Обновить аватар" isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} buttonValue="Сохранить" >
