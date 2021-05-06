@@ -3,11 +3,11 @@ import React from 'react';
 function Card({ card, onCardClick }) {
     function handleClick() {
         onCardClick(card);
-      }  
+    }
 
     return (
         <li className="photo">
-            <img className="photo__img" alt={card.name} src={card.link} onClick={handleClick}/>
+            <img className="photo__img" alt={card.name} src={card.link} onClick={handleClick} />
             <div className="photo__description">
                 <h2 className="photo__title">{card.name}</h2>
                 <div className="photo__like-wrapper">

@@ -69,15 +69,15 @@ function App() {
   return (
     <div>
       <Header />
-      <Main 
-        onEditProfile={handleEditProfileClick} 
-        onAddPlace={handleAddPlaceClick} 
-        onEditAvatar={handleEditAvatarClick} 
-        userName={userName} 
-        userAvatar={userAvatar} 
-        userDescription={userDescription} 
-        cards={cards} 
-        onCardClick={handleCardClick} 
+      <Main
+        onEditProfile={handleEditProfileClick}
+        onAddPlace={handleAddPlaceClick}
+        onEditAvatar={handleEditAvatarClick}
+        userName={userName}
+        userAvatar={userAvatar}
+        userDescription={userDescription}
+        cards={cards}
+        onCardClick={handleCardClick}
       />
       <Footer />
 
@@ -118,7 +118,5 @@ function App() {
     </div>
   );
 }
-
-
 
 export default App;
