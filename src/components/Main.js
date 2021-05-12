@@ -1,21 +1,42 @@
 import React from 'react';
+import CardsContext from '../context/CardsContext';
+import CurrentUserContext from '../context/CurrentUserContext';
 import addButton from '../images/__add-button.svg';
 import Card from './Card';
+import api from '../utils/api';
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, userName, userAvatar, userDescription, cards, onCardClick }) {
+function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
+
+  const currentUser = React.useContext(CurrentUserContext);
+  const cards = React.useContext(CardsContext);
+
+
+ /*  function handleCardLike(card) {
+    // Снова проверяем, есть ли уже лайк на этой карточке
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+
+    // Отправляем запрос в API и получаем обновлённые данные карточки
+    api.likeCard(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+      });
+  } */
+
+
   return (
+    
     <main>
       <section className="profile">
         <div className="user">
           <div className="user-photo" onClick={onEditAvatar}>
-            <img className="user__avatar" src={userAvatar} alt="фото пользователя" title="фото пользователя" />
+            <img className="user__avatar" src={currentUser.avatar} alt="фото пользователя" title="фото пользователя" />
           </div>
           <div className="user__profile-info">
             <div className="user__name-block">
-              <h1 className="user__name">{userName}</h1>
+              <h1 className="user__name">{currentUser.name}</h1>
               <button className="user__edit-button" type="submit" aria-label="edit" onClick={onEditProfile} ></button>
             </div>
-            <p className="user__about">{userDescription}</p>
+            <p className="user__about">{currentUser.about}</p>
           </div>
         </div>
 
@@ -26,7 +47,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, userName, userAvatar, u
 
       <section className="photo-tape">
         <div className='photos-grid'>
-          {cards.map(({ id, ...card }) => <Card key={id} {...card} onCardClick={onCardClick} />)}
+          {cards.map(({ id, ...card }) => <Card key={id} {...card} onCardClick={onCardClick} currentUser={currentUser} />)}
         </div>
       </section>
 
