@@ -24,8 +24,8 @@ function App() {
     api.getCards()
       .then(data =>
         setCards(data.map(card => ({
-          card,
-          id: card._id
+          card
+          /* id: card._id */
         })))
       )
       .catch((err) => {
@@ -64,6 +64,10 @@ function App() {
     setSelectedCard(card)
   }
 
+  function updateCard(newCard,card) {
+   setCards((cards) => cards.map((c) => c.card._id === card._id ? {card: newCard} : c)); 
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <CardsContext.Provider value={cards}>
@@ -74,6 +78,7 @@ function App() {
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
           onCardClick={handleCardClick}
+          updateCard={updateCard}
         />
         <Footer />
 
