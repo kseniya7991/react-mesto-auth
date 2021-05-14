@@ -1,12 +1,16 @@
 import React from 'react';
 
-function Card({ card, onCardClick, currentUser, onCardLike}) {
+function Card({ card, onCardClick, currentUser, onCardLike, onCardDelete}) {
     function handleClick() {
         onCardClick(card);
     }
 
     function handleLikeClick() {
         onCardLike(card);
+    }
+
+    function handleDeleteClick() {
+        onCardDelete(card)
     }
    
    
@@ -35,7 +39,7 @@ function Card({ card, onCardClick, currentUser, onCardLike}) {
                     <span className="photo__like-counter">{card.likes.length}</span>
                 </div>
             </div>
-            <button className={cardDeleteButtonClassName} type="button" aria-label="delete"></button>
+            <button className={cardDeleteButtonClassName} type="button" aria-label="delete" onClick={handleDeleteClick}></button>
         </li>
     )
 }

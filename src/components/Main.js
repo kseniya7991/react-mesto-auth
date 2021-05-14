@@ -5,7 +5,7 @@ import addButton from '../images/__add-button.svg';
 import Card from './Card';
 import api from '../utils/api';
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onLikeClick}) {
+function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onLikeClick, onDeleteClick}) {
 
   const currentUser = React.useContext(CurrentUserContext);
   const cards = React.useContext(CardsContext);
@@ -21,6 +21,11 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onLikeClic
         onLikeClick(newCard, card)
       }); 
 
+   }
+
+   function handleCardDelete(card) {
+     api.removeCard(card._id) 
+     .then(() => onDeleteClick(card))
    }
 
 
@@ -48,7 +53,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onLikeClic
 
       <section className="photo-tape">
         <div className='photos-grid'>
-          {cards.map(({...card }) => <Card key={card.card._id} {...card} onCardClick={onCardClick} currentUser={currentUser} onCardLike={handleCardLike}/>)}
+          {cards.map(({...card }) => <Card key={card.card._id} {...card} onCardClick={onCardClick} currentUser={currentUser} onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>)}
         </div>
       </section>
 

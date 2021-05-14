@@ -25,7 +25,6 @@ function App() {
       .then(data =>
         setCards(data.map(card => ({
           card
-          /* id: card._id */
         })))
       )
       .catch((err) => {
@@ -68,6 +67,12 @@ function App() {
    setCards((cards) => cards.map((c) => c.card._id === card._id ? {card: newCard} : c)); 
   }
 
+  //Написать отрисовку нового массива
+  function handleDeleteClick(card) {
+    setCards((cards) => cards.filter((c) => c.card._id !== card._id)); 
+  }
+
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <CardsContext.Provider value={cards}>
@@ -79,6 +84,7 @@ function App() {
           onEditAvatar={handleEditAvatarClick}
           onCardClick={handleCardClick}
           onLikeClick={handleLikeClick}
+          onDeleteClick={handleDeleteClick}
         />
         <Footer />
 
