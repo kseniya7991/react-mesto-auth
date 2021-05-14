@@ -64,7 +64,7 @@ function App() {
     setSelectedCard(card)
   }
 
-  function updateCard(newCard,card) {
+  function handleLikeClick(newCard,card) {
    setCards((cards) => cards.map((c) => c.card._id === card._id ? {card: newCard} : c)); 
   }
 
@@ -78,7 +78,7 @@ function App() {
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
           onCardClick={handleCardClick}
-          updateCard={updateCard}
+          onLikeClick={handleLikeClick}
         />
         <Footer />
 

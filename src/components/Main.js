@@ -5,7 +5,7 @@ import addButton from '../images/__add-button.svg';
 import Card from './Card';
 import api from '../utils/api';
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, updateCard}) {
+function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onLikeClick}) {
 
   const currentUser = React.useContext(CurrentUserContext);
   const cards = React.useContext(CardsContext);
@@ -15,13 +15,13 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, updateCard
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.likeCard(card._id, !isLiked)
+
+      api.changeLikeCardStatus(card._id, isLiked)
       .then((newCard) => {
-        console.log(newCard)
-        updateCard(newCard, card)
-        /* setCards((cards) => cards.map((c) => c._id === card._id ? newCard : c));  */ 
-      });
-  }
+        onLikeClick(newCard, card)
+      }); 
+
+   }
 
 
   return (

@@ -84,22 +84,9 @@ const handleResponse = (res) => {
         });
     }
   
-    likeCard(idCard) {
+    changeLikeCardStatus(idCard, isLiked) {
       return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/cards/likes/${idCard}`, {
-        method: 'PUT',
-        headers: {
-          authorization: this._token,
-        },
-      })
-        .then(handleResponse)
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  
-    deleteLikeCard(idCard) {
-      return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/cards/likes/${idCard}`, {
-        method: 'DELETE',
+        method: !isLiked ? 'PUT' : 'DELETE',
         headers: {
           authorization: this._token,
         },
