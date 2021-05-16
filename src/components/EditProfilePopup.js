@@ -2,7 +2,7 @@ import React from 'react';
 import PopupWithForm from './PopupWithForm';
 import CurrentUserContext from '../context/CurrentUserContext';
 
-function EditProfilePopup({isOpen, onClose}) {
+function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
 
     const currentUser = React.useContext(CurrentUserContext);
     const [name, setName] = React.useState('');
@@ -14,6 +14,7 @@ function EditProfilePopup({isOpen, onClose}) {
       }, [currentUser]);
 
     function handleInputNameChange(e) {
+        console.log(e.target)
         setName(e.target.value);
     }
 
@@ -21,8 +22,19 @@ function EditProfilePopup({isOpen, onClose}) {
         setAbout(e.target.value);
     }
 
+    function handleSubmit(e) {
+        // Запрещаем браузеру переходить по адресу формы
+        e.preventDefault();
+      
+        // Передаём значения управляемых компонентов во внешний обработчик
+        onUpdateUser({name, about})
+
+        //Закрываем попап
+        onClose();
+      } 
+
     return (
-        <PopupWithForm name="profile" title="Редактировать профиль" isOpen={isOpen} onClose={onClose} buttonValue="Сохранить">
+        <PopupWithForm name="profile" title="Редактировать профиль" isOpen={isOpen} onClose={onClose} buttonValue="Сохранить" onSubmit={handleSubmit}>
             <section className="popup__input-section">
                 <input className="popup__input popup__input_text_name" id="profile-name" name="name" type="text" placeholder={"Ваше имя"} value={name || ''} minLength="2" maxLength="40" required onChange={handleInputNameChange}/>
                 <span className="popup__input-error" id="profile-name-error"></span>
