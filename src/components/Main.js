@@ -3,7 +3,7 @@ import CurrentUserContext from '../context/CurrentUserContext';
 import addButton from '../images/__add-button.svg';
 import Card from './Card';
 
-function Main({ cards, onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, onCardDelete}) {
+function Main({ cards, onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, onCardDeleteBtn}) {
 
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -31,7 +31,7 @@ function Main({ cards, onEditProfile, onAddPlace, onEditAvatar, onCardClick, onC
 
       <section className="photo-tape">
         <div className='photos-grid'>
-          {cards.map(({...card }) => <Card key={card.card._id} {...card} onCardClick={onCardClick} currentUser={currentUser} onCardLike={onCardLike} onCardDelete={onCardDelete}/>)}
+          {cards.map(({...card }) => <Card key={card.card._id} {...card} onCardClick={onCardClick} currentUser={currentUser} onCardLike={onCardLike} onCardDeleteBtn={onCardDeleteBtn} />)}
         </div>
       </section>
 

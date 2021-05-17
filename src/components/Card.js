@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Card({ card, onCardClick, currentUser, onCardLike, onCardDelete}) {
+function Card({ card, onCardClick, currentUser, onCardLike, onCardDeleteBtn}) {
     function handleClick() {
         onCardClick(card);
     }
@@ -10,7 +10,7 @@ function Card({ card, onCardClick, currentUser, onCardLike, onCardDelete}) {
     }
 
     function handleDeleteClick() {
-        onCardDelete(card)
+        onCardDeleteBtn(card);
     }
    
    
