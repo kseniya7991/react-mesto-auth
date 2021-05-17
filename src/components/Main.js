@@ -1,5 +1,5 @@
 import React from 'react';
-import CurrentUserContext from '../context/CurrentUserContext';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 import addButton from '../images/__add-button.svg';
 import Card from './Card';
 
