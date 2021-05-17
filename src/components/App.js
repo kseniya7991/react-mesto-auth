@@ -129,6 +129,8 @@ function App() {
 
           <AddPlacePopup  isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} />
 
+{/* 
+          <ConfirmDeletePopup isOpen={isConfirmDeletePopup} onClose={closeAllPopups} /> */}
           <PopupWithForm name="delete-card" title="Вы уверены?" onClose={closeAllPopups} buttonValue="Да">
           </PopupWithForm>
 

@@ -14,7 +14,6 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
       }, [currentUser]);
 
     function handleInputNameChange(e) {
-        console.log(e.target)
         setName(e.target.value);
     }
 
