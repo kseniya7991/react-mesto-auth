@@ -1,3 +1,4 @@
-export const keyClose = 'Escape'; 
+const keyClose = 'Escape'; 
+export default keyClose;
 
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Card({ card, onCardClick, currentUser, onCardLike, onCardDeleteBtn}) {
+function Card({ card, onCardClick, currentUser, onCardLike, onCardDeleteBtn }) {
     function handleClick() {
         onCardClick(card);
     }
@@ -12,15 +12,15 @@ function Card({ card, onCardClick, currentUser, onCardLike, onCardDeleteBtn}) {
     function handleDeleteClick() {
         onCardDeleteBtn(card);
     }
-   
-   
+
+
     //Определяем, является ли текущий пользователь владельцем карточки
     const isOwn = card.owner._id === currentUser._id;
 
     //Класс для отображения корзинки удаления карточки
     const cardDeleteButtonClassName = (
         `photo__delete ${isOwn ? '' : 'photo__delete_inactive'}`
-      ); 
+    );
 
     // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
     const isLiked = card.likes.some(i => i._id === currentUser._id);
@@ -28,7 +28,7 @@ function Card({ card, onCardClick, currentUser, onCardLike, onCardDeleteBtn}) {
     // Создаём переменную, которую после зададим в `className` для кнопки лайка
     const cardLikeButtonClassName = (
         `photo__like ${isLiked ? 'photo__like_active' : ''}`
-      );
+    );
     return (
         <li className="photo">
             <img className="photo__img" alt={card.name} src={card.link} onClick={handleClick} />

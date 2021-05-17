@@ -10,10 +10,24 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import ConfirmDeletePopup from './ConfirmDeletePopup';
+import keyClose from '../utils/constants';
+
 
 function App() {
   const [currentUser, setCurrentUser] = useState('');
   const [cards, setCards] = useState([]);
+
+
+  useEffect(() => {
+    function handleEscClick(e) {
+      if (e.key === keyClose) closeAllPopups();
+    }
+    document.addEventListener('keydown', handleEscClick)
+    return () => {
+      document.removeEventListener('keydown', handleEscClick);
+    };
+  }, []);
+
 
   useEffect(() => {
     api.getUser()
@@ -34,7 +48,6 @@ function App() {
         console.log(err);
       });
   }, [])
-
 
 
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -102,7 +115,6 @@ function App() {
   //Обработка удаления карточки
 
   function handleCardDeleteBtn() {
-    console.log(selectedDeleteCard._id)
     api.removeCard(selectedDeleteCard._id)
       .then(() => {
         setCards((cards) => cards.filter((c) => c.card._id !== selectedDeleteCard._id));
@@ -112,17 +124,14 @@ function App() {
   function handleAddPlaceSubmit(addedCard) {
     api.addCard(addedCard)
       .then((newCard) => {
-        console.log({card: newCard}, cards)
-        setCards([{card: newCard}, ...cards]); 
+        setCards([{ card: newCard }, ...cards]);
       })
   }
-  
-
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <CardsContext.Provider value={cards}>
-        <div>
+        <div >
           <Header />
           <Main
             cards={cards}
@@ -139,12 +148,9 @@ function App() {
 
           <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
 
-          <AddPlacePopup  isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} />
+          <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} />
 
-
-          <ConfirmDeletePopup  isOpen={isConfirmDeleteOpen} onClose={closeAllPopups} onCardDeleteBtn={handleCardDeleteBtn}/>
-          {/* <PopupWithForm name="delete-card" title="Вы уверены?" onClose={closeAllPopups} buttonValue="Да">
-          </PopupWithForm> */}
+          <ConfirmDeletePopup isOpen={isConfirmDeleteOpen} onClose={closeAllPopups} onCardDeleteBtn={handleCardDeleteBtn} />
 
           <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
 

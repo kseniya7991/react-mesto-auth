@@ -12,7 +12,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        onAddPlace({title, link})
+        onAddPlace({ title, link })
         //Закрываем попап и сбрасывавем форму
         formPopup.reset();
         onClose();
