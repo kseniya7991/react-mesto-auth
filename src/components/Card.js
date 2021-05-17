@@ -1,6 +1,10 @@
 import React from 'react';
+import CurrentUserContext from '../context/CurrentUserContext';
 
-function Card({ card, onCardClick, currentUser, onCardLike, onCardDeleteBtn }) {
+function Card({ card, onCardClick, onCardLike, onCardDeleteBtn }) {
+
+    const currentUser = React.useContext(CurrentUserContext);
+
     function handleClick() {
         onCardClick(card);
     }
@@ -12,8 +16,7 @@ function Card({ card, onCardClick, currentUser, onCardLike, onCardDeleteBtn }) {
     function handleDeleteClick() {
         onCardDeleteBtn(card);
     }
-
-
+    
     //Определяем, является ли текущий пользователь владельцем карточки
     const isOwn = card.owner._id === currentUser._id;
 
