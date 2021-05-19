@@ -11,9 +11,9 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        onUpdateAvatar(avatarRef.current.value);
-        //Закрываем попап
-        onClose();
+        onUpdateAvatar(avatarRef.current.value)
+            //Закрываем попап
+            .then(onClose())
     }
 
     return (

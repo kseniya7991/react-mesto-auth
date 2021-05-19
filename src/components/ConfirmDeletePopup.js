@@ -6,7 +6,7 @@ function ConfirmDeletePopup({ isOpen, onClose, onCardDeleteBtn }) {
     function handleSubmit(e) {
         e.preventDefault();
         onCardDeleteBtn()
-        onClose();
+            .then(onClose())
     }
 
     return (

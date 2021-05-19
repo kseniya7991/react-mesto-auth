@@ -10,43 +10,21 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import ConfirmDeletePopup from './ConfirmDeletePopup';
-import keyClose from '../utils/constants';
+
 
 
 function App() {
-  const [currentUser, setCurrentUser] = useState('');
+  const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
 
 
   useEffect(() => {
-    function handleEscClick(e) {
-      if (e.key === keyClose) closeAllPopups();
-    }
-    document.addEventListener('keydown', handleEscClick)
-    return () => {
-      document.removeEventListener('keydown', handleEscClick);
-    };
-  }, []);
-
-
-  useEffect(() => {
-    api.getUser()
-      .then((userData) => {
+    Promise.all([api.getUser(), api.getCards()])
+      .then(([userData, cardsData]) => {
         setCurrentUser(userData);
+        setCards(cardsData.map(card => ({ card })))
       })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    api.getCards()
-      .then(data =>
-        setCards(data.map(card => ({
-          card
-        })))
-      )
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log(err));
   }, [])
 
 
@@ -89,13 +67,15 @@ function App() {
   }
 
   function handleUpdateUser(name, about) {
-    api.sendUser(name, about)
+    return api.sendUser(name, about)
       .then(userData => setCurrentUser(userData))
+      .catch((err) => console.log(err));
   }
 
   function handleUpdateAvatar(avatar) {
-    api.updateAvatar(avatar)
+    return api.updateAvatar(avatar)
       .then(userData => setCurrentUser(userData))
+      .catch((err) => console.log(err));
   }
 
   //Обработка лайка карточки 
@@ -108,24 +88,26 @@ function App() {
     api.changeLikeCardStatus(card._id, isLiked)
       .then((newCard) => {
         setCards((cards) => cards.map((c) => c.card._id === card._id ? { card: newCard } : c));
-      });
-
+      })
+      .catch((err) => console.log(err));
   }
 
   //Обработка удаления карточки
 
   function handleCardDeleteBtn() {
-    api.removeCard(selectedDeleteCard._id)
+    return api.removeCard(selectedDeleteCard._id)
       .then(() => {
         setCards((cards) => cards.filter((c) => c.card._id !== selectedDeleteCard._id));
       })
+      .catch((err) => console.log(err));
   }
 
   function handleAddPlaceSubmit(addedCard) {
-    api.addCard(addedCard)
+    return api.addCard(addedCard)
       .then((newCard) => {
         setCards([{ card: newCard }, ...cards]);
       })
+      .catch((err) => console.log(err));
   }
 
   return (

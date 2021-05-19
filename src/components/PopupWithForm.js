@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import keyClose from '../utils/constants';
 
 function PopupWithForm({ title, name, children, isOpen, onClose, buttonValue, onSubmit }) {
 
@@ -7,6 +8,17 @@ function PopupWithForm({ title, name, children, isOpen, onClose, buttonValue, on
             onClose();
         }
     }
+
+    useEffect(() => {
+        function handleEscClick(e) {
+            if (e.key === keyClose) onClose();
+        }
+
+        if (isOpen) {
+            document.addEventListener('keydown', handleEscClick);
+        }
+        return () => document.removeEventListener('keydown', handleEscClick);
+    }, [isOpen, onClose]);
 
 
 

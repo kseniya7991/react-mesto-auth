@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import keyClose from '../utils/constants';
+
 function ImagePopup({ selectedCard, onClose }) {
 
 
@@ -8,6 +10,19 @@ function ImagePopup({ selectedCard, onClose }) {
     }
   }
 
+  useEffect(() => {
+    function handleEscClick(e) {
+      if (e.key === keyClose) onClose();
+    }
+
+    if (Object.entries(selectedCard).length) {
+      document.addEventListener('keydown', handleEscClick);
+    }
+    return () => document.removeEventListener('keydown', handleEscClick);
+  }, [Object.entries(selectedCard).length, onClose]);
+
+
+  
   return (
     <section className={`popup popup_photo ${Object.entries(selectedCard).length !== 0 ? ' popup_opened' : ''}`} onClick={handleOverlayClick}>
       <figure className="popup__photo-block">
