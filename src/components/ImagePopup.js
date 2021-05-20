@@ -19,7 +19,7 @@ function ImagePopup({ selectedCard, onClose }) {
       document.addEventListener('keydown', handleEscClick);
     }
     return () => document.removeEventListener('keydown', handleEscClick);
-  }, [Object.entries(selectedCard).length, onClose]);
+  }, [onClose]);
 
 
   
