@@ -8,14 +8,14 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
     const avatarRef = React.useRef();
 
     useEffect(() => {
-        avatarRef.current.value = currentUser.avatar
+        if (currentUser) avatarRef.current.value = currentUser.avatar
     }, [currentUser, isOpen])
 
     function handleSubmit(e) {
+        // Запрещаем браузеру переходить по адресу формы
         e.preventDefault();
+        //Передаем данные аватара на сервер и обновляем аватар
         onUpdateAvatar(avatarRef.current.value)
-            //Закрываем попап
-            .then(onClose())
     }
 
     return (

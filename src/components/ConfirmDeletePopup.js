@@ -4,9 +4,10 @@ import PopupWithForm from './PopupWithForm';
 function ConfirmDeletePopup({ isOpen, onClose, onCardDeleteBtn }) {
 
     function handleSubmit(e) {
+        // Запрещаем браузеру переходить по адресу формы
         e.preventDefault();
+        //Передаем информацию об удалении карточки на сервер
         onCardDeleteBtn()
-            .then(onClose())
     }
 
     return (

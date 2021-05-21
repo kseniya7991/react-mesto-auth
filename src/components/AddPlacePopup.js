@@ -16,9 +16,10 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
       }, [isOpen]);
 
     function handleSubmit(e) {
+        // Запрещаем браузеру переходить по адресу формы
         e.preventDefault();
+        //Передаем данные новой карточки на сервер для отрисовки
         onAddPlace({ title, link })
-        .then( onClose())
     }
 
 

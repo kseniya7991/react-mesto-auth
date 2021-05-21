@@ -69,12 +69,14 @@ function App() {
   function handleUpdateUser(name, about) {
     return api.sendUser(name, about)
       .then(userData => setCurrentUser(userData))
+      .then(closeAllPopups())
       .catch((err) => console.log(err));
   }
 
   function handleUpdateAvatar(avatar) {
     return api.updateAvatar(avatar)
       .then(userData => setCurrentUser(userData))
+      .then( closeAllPopups())
       .catch((err) => console.log(err));
   }
 
@@ -99,6 +101,7 @@ function App() {
       .then(() => {
         setCards((cards) => cards.filter((c) => c.card._id !== selectedDeleteCard._id));
       })
+      .then( closeAllPopups())
       .catch((err) => console.log(err));
   }
 
@@ -107,6 +110,7 @@ function App() {
       .then((newCard) => {
         setCards([{ card: newCard }, ...cards]);
       })
+      .then( closeAllPopups())
       .catch((err) => console.log(err));
   }
 
