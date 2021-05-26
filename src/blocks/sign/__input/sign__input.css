@@ -1,0 +1,20 @@
+.sign__input {
+    background: none;
+    border: 0;
+    border-bottom: 1px solid white;
+    color: white;
+    height: 40px;
+    font-family: 'Inter', arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 30px;
+}
+
+.sign__input:last-child {
+    margin-bottom: 0;
+}
+
+input::-moz-placeholder { color: #CCC; }
+input::-webkit-input-placeholder { color: #CCC; }

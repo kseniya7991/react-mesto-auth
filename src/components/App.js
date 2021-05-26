@@ -1,15 +1,24 @@
 import React, { useEffect, useState } from 'react';
+import { Switch, Route } from 'react-router-dom';
+
 import Header from './Header';
 import Main from './Main'
 import Footer from './Footer';
 import ImagePopup from './ImagePopup';
-import api from '../utils/api';
-import CurrentUserContext from '../contexts/CurrentUserContext';
-import CardsContext from '../contexts/CardsContext';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import ConfirmDeletePopup from './ConfirmDeletePopup';
+import Register from './Register';
+
+import api from '../utils/api';
+
+import CurrentUserContext from '../contexts/CurrentUserContext';
+import CardsContext from '../contexts/CardsContext';
+
+
+
+
 
 
 
@@ -115,11 +124,15 @@ function App() {
   }
 
   return (
+    
+  
+    
     <CurrentUserContext.Provider value={currentUser}>
       <CardsContext.Provider value={cards}>
-        <div >
+        <div className="wrapper-block">
           <Header />
-          <Main
+          <Register />
+           {/* <Main
             cards={cards}
             onEditProfile={handleEditProfileClick}
             onAddPlace={handleAddPlaceClick}
@@ -138,11 +151,12 @@ function App() {
 
           <ConfirmDeletePopup isOpen={isConfirmDeleteOpen} onClose={closeAllPopups} onCardDeleteBtn={handleCardDeleteBtn} />
 
-          <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
+          <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />  */}
 
         </div>
       </CardsContext.Provider>
     </CurrentUserContext.Provider>
+   
   );
 }
 
