@@ -60,3 +60,7 @@
 @import url('./blocks/sign/__title/sign__title.css');
 @import url('./blocks/sign/__input/sign__input.css');
 @import url('./blocks/sign/__save-button/sign__save-button.css');
+@import url('./blocks/sign/__text/sign__text.css');
+@import url('./blocks/sign/__text/_disabled/sign__text_disabled.css');
+@import url('./blocks/sign/__link/sign__link.css');
+@import url('./blocks/header/__link/header__link.css');

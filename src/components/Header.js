@@ -7,6 +7,9 @@ function Header() {
       <a className="header__logo-link" target="_blank" href="#">
         <img className="header__logo" src={logo} alt="место" title="место" />
       </a>
+      <a className="header__link" target="_blank" href="#">
+        Войти
+      </a>
     </header>
   );
 }
