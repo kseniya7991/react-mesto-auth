@@ -3,10 +3,21 @@ import SignForm from './SignForm';
 
 function Register() {
      const name = "Register";
-    /*onRender(name);
-     */
+  
+     function handleSubmit() {
+
+     }
+
+     function handleEmailChange(e) {
+        console.log('email: ', e.target.value)
+    }
+
+    function handlePasswordChenge(e) {
+        console.log('password: ', e.target.value)
+    }
+
     return(
-    <SignForm name={name} title="Регистрация" buttonValue="Зарегистрироваться"/>
+    <SignForm name={name} title="Регистрация" buttonValue="Зарегистрироваться" onSubmit={handleSubmit}  onChangeEmail={handleEmailChange} onChangePassword={handlePasswordChenge}/>
     )        
    
 }

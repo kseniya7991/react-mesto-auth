@@ -12,6 +12,13 @@ import HeaderLinkSignUp from './HeaderLinkSignUp';
 import HeaderLoggedIn from './HeaderLoggedIn';
 
 import MainPage from './MainPage';
+import * as auth from '../utils/auth';
+
+auth.register("11122a2qsdswe@email.ru", "1112sd22aqsw333")
+/* auth.register("111222333@email.ru", "111222333") */
+/* auth.register("111222@email.ru", "111222") */
+/* auth.authorize("111222@email.ru", "111222") */
+/* auth.checkToken('sssd') */
 
 function App() {
   const [loggedIn, setLoggetIn] = useState(false);
