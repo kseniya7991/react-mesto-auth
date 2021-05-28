@@ -14,13 +14,8 @@ import HeaderLoggedIn from './HeaderLoggedIn';
 import MainPage from './MainPage';
 
 function App() {
-  const [loggedIn, setLoggetIn] = useState(true);
+  const [loggedIn, setLoggetIn] = useState(false);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
-  /* const [headerLink, setHeaderLink] = useState('register') */
-
-  /*  function handleRendering(name) {
-    setHeaderLink(name);
-  } */
 
   function closeAllPopups() {
     setIsInfoPopupOpen(false);
@@ -29,14 +24,24 @@ function App() {
   return (
     <div>
       <InfoTooltip isOpen={isInfoPopupOpen} onClose={closeAllPopups} status={false} />
-      {loggedIn ? <HeaderLoggedIn /> : ''}
+      
+      <Header>
+        <Switch>
+          <Route path="/sign-up">
+          <HeaderLinkSignUp />
+          </Route>
+          <Route path="/sign-in">
+            <HeaderLinkSignIn />
+          </Route>
+          <ProtectedRoute path="/" loggedIn={loggedIn} component={HeaderLoggedIn} />
+        </Switch>
+      </Header>
+
       <Switch>
         <Route path="/sign-up">
-        <HeaderLinkSignUp />
           <Register />
         </Route>
         <Route path="/sign-in">
-          <HeaderLinkSignIn />
           <Login />
         </Route>
         <ProtectedRoute path="/" loggedIn={loggedIn} component={MainPage} />

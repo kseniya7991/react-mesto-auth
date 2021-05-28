@@ -1,7 +1,0 @@
-.sign__input-section{
-    display: flex;
-    align-items: stretch;
-    justify-content: space-around;
-    max-height: max-content;
-    flex-direction: column;
-}

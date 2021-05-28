@@ -54,3 +54,7 @@
   opacity: 1;
   transition: all .5s ease;
 }
+
+.user-photo:hover {
+  cursor: pointer;
+}

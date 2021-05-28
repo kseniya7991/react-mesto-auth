@@ -22,18 +22,16 @@ function SignForm({name, title, buttonValue}) {
             </form>
         </section> */
         <section className="sign">
-        <form className="sign__form" name={name} noValidate>
+        <form className="popup__form popup__form_sign" name={name} noValidate>
             <div>
             <h2 className="popup__title popup__title_sign">{title}</h2>
             <section className="popup__input-section">
-                <input className="sign__input" id="email" name="email" type="email" placeholder="Email" required />
-                <input className="sign__input" id="password" name="password" type="password" placeholder="Пароль" required />
+                <input className="popup__input popup__input_sign" id="email" name="email" type="email" placeholder="Email" required />
+                <input className="popup__input popup__input_sign" id="password" name="password" type="password" placeholder="Пароль" required />
             </section>
             </div>
             <div>
-            <button type="submit" formTarget="_self" className="sign__save-button" value={buttonValue}>{buttonValue}</button>
-            
-
+            <button type="submit" formTarget="_self" className="popup__save-button popup__save-button_sign" value={buttonValue}>{buttonValue}</button>
             <p className={`sign__text ${name == "Login" ? ' sign__text_disabled' : ''} `}>Уже зарегистрированы? <a className="sign__link">Войти</a></p>
             </div>
         </form>

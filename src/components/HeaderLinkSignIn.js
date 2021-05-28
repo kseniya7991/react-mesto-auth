@@ -1,16 +1,16 @@
 import React from 'react';
-import Header from './Header';
+import { Redirect } from 'react-router-dom';
 
 function HeaderLinkSignIn() {
+
+  function handleRegisterCLick() {
+    <Redirect to path="/sign-up"></Redirect>
+  }
+
   return (
-      <Header>
-    <a
-    className={`header__link`}
-    href="/sign-up"
-  >
-    Регистрация
-  </a>
-  </Header>
+    <a className={`header__link`} href="/sign-up" onClick={handleRegisterCLick}>
+      Регистрация
+    </a>
   );
 }
 
