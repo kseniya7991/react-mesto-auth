@@ -2,8 +2,11 @@ import React, { useEffect } from 'react';
 import SignForm from './SignForm';
 
 function Register() {
+     const name = "Register";
+    /*onRender(name);
+     */
     return(
-    <SignForm name="Register" title="Регистрация" buttonValue="Зарегистрироваться" />
+    <SignForm name={name} title="Регистрация" buttonValue="Зарегистрироваться"/>
     )        
    
 }
