@@ -1,44 +1,17 @@
 import React from 'react';
 import logo from '../images/__logo.svg';
+import { Link } from 'react-router-dom';
 
-function Header({ loggedIn, headerLinkValue, children}) {
-
+function Header({ children, email }) {
   return (
     <header className="header">
-      <a className="header__logo-link" target="_blank" href="#">
+      <Link className="header__logo-link" to="#">
         <img className="header__logo" src={logo} alt="место" title="место" />
-      </a>
-     
-{children}
-{/*       <a
-        className={`header__link`}
-        target="_blank"
-        href="#"
-      >
-        Войти
-      </a> */}
-{/* 
-      <a
-        className={`header__link ${headerLinkValue == 'Register' ? ' header__link_active' : ''}`}
-        target="_blank"
-        href="#"
-      >
-        Войти
-      </a>
-      <a
-        className={`header__link ${headerLinkValue == 'Login' ? ' header__link_active' : ''}`}
-        target="_blank"
-        href="#"
-      >
-        Регистрация
-      </a>
-      <a
-        className={`header__link ${loggedIn ? ' header__link_active' : ''}`}
-        target="_blank"
-        href="#"
-      >
-        Выйти
-      </a> */}
+      </Link>
+      <div>
+        <span className="header__email">{email}</span>
+        {children}
+      </div>
     </header>
   );
 }

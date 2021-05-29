@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter} from 'react-router-dom';
 
 import Header from './Header';
 import Footer from './Footer';
@@ -9,7 +9,7 @@ import ProtectedRoute from './ProectedRoute';
 import InfoTooltip from './InfoTooltip';
 import HeaderLinkSignIn from './HeaderLinkSignIn';
 import HeaderLinkSignUp from './HeaderLinkSignUp';
-import HeaderLoggedIn from './HeaderLoggedIn';
+import HeaderSignOut from './HeaderSignOut';
 
 import { useHistory } from "react-router";
 
@@ -23,12 +23,22 @@ import * as auth from '../utils/auth';
 /* auth.checkToken('sssd') */
 
 function App() {
-  const [loggedIn, setLoggetIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
   const [statusInfoPopup, setStatusInfoPopup] = useState(false);
-  const [state, setState] = useState({});
   const history = useHistory();
   const [message, setMessage] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+
+  useEffect(() => {
+    tokenCheck()
+  }, [])
+
+  useEffect(() => {
+    if(loggedIn) {
+      history.push('/')
+    }
+  }, [loggedIn])
 
   function closeInfoPopup() {
     if(statusInfoPopup) {
@@ -38,6 +48,21 @@ function App() {
       setIsInfoPopupOpen(false);
     }
   }
+
+
+  function tokenCheck() {
+    const token = localStorage.getItem('token');
+    if(token) {
+      auth.getContent(token)
+      .then((res) => {
+        const { _id , email} = res.data;
+        setUserEmail(email)
+        setLoggedIn(true)
+      })
+      .catch((err) => console.log(err))
+    }
+  }
+
 
   function handleSubmitRegister(email, password) {
     auth.register(email, password)
@@ -58,25 +83,32 @@ function App() {
   function handleSubmitLogin(email,password) {
     auth.authorize(email, password)
     .then((res) => {
-      console.log(res)
       if (res.message){
         setMessage(res.message)
         setStatusInfoPopup(false);
         setIsInfoPopupOpen(true);
       }
       if (res.token){
-        setLoggetIn(true)
+        setLoggedIn(true)
         history.push('/');
+        setUserEmail(email)
         }
     })
     .catch((err) => console.log(err));
+  }
+
+  function handleSignOut() {
+    localStorage.removeItem('token')
+    setLoggedIn(false);
+    setUserEmail('');
+    <Redirect to="/sign-in" />
   }
 
   return (
     <div>
       <InfoTooltip isOpen={isInfoPopupOpen} onClose={closeInfoPopup} status={statusInfoPopup} message={message}/>
       
-      <Header>
+      <Header email={userEmail}>
         <Switch>
           <Route path="/sign-up">
           <HeaderLinkSignUp />
@@ -84,7 +116,7 @@ function App() {
           <Route path="/sign-in">
             <HeaderLinkSignIn />
           </Route>
-          <ProtectedRoute path="/" loggedIn={loggedIn} component={HeaderLoggedIn} />
+          <ProtectedRoute path="/" loggedIn={loggedIn} component={HeaderSignOut} onSignOut={handleSignOut}/>
         </Switch>
       </Header>
 

@@ -42,7 +42,7 @@ export const authorize = (email, password) => {
   };
 
 
-export const checkToken = (token) => {
+export const getContent = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {
@@ -51,5 +51,4 @@ export const checkToken = (token) => {
     },
   })
     .then((res) => res.json())
-    .then((data) => data);
 };
