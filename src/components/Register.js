@@ -1,19 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import SignForm from './SignForm';
 
-function Register() {
+function Register({onRegister}) {
      const name = "Register";
+     const [email, setEmail] = useState('')
+     const [password, setPassword] = useState('')
   
-     function handleSubmit() {
-
+     function handleSubmit(e) {
+        e.preventDefault();
+        onRegister(email, password)
      }
 
      function handleEmailChange(e) {
-        console.log('email: ', e.target.value)
+        setEmail(e.target.value)
     }
 
     function handlePasswordChenge(e) {
-        console.log('password: ', e.target.value)
+        setPassword(e.target.value)
     }
 
     return(

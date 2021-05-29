@@ -21,7 +21,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
  
    
    function isEmpty() {
-       return avatarRef.current.value == '';
+       return avatarRef.current.value === '';
     }
 
 
@@ -30,7 +30,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
     return (
         <PopupWithForm name="update-avatar" title="Обновить аватар" isOpen={isOpen} onClose={onClose} buttonValue="Сохранить" onSubmit={handleSubmit} isEmpty={isEmpty}>
             <section className="popup__input-section">
-                <input className="popup__input popup__input_link_avatar" id="link-avatar" name="AvatarLink" type="url" placeholder="Ссылка на фото" required ref={avatarRef} dafaultValue={currentUser.avatar || ''} onChange={isEmpty} />
+                <input className="popup__input popup__input_link_avatar" id="link-avatar" name="AvatarLink" type="url" placeholder="Ссылка на фото" required ref={avatarRef} dafaultvalue={currentUser.avatar || ''} onChange={isEmpty} />
                 <span className="popup__input-error" id="link-avatar-error"></span>
             </section>
         </PopupWithForm>

@@ -1,18 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState} from 'react';
 import SignForm from './SignForm';
 
-function Login() {
+function Login({ onLogin }) {
   const name = 'Login';
-  /*  onRender(name); */
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onLogin(email, password);
+  }
 
   function handleEmailChange(e) {
-    console.log('email: ', e.target.value);
+    setEmail(e.target.value);
   }
 
   function handlePasswordChenge(e) {
-    console.log('password: ', e.target.value);
+    setPassword(e.target.value);
   }
-  return <SignForm name={name} title="Вход" buttonValue="Войти" onChangeEmail={handleEmailChange} onChangePassword={handlePasswordChenge} />;
+  return (
+    <SignForm
+      name={name}
+      title="Вход"
+      buttonValue="Войти"
+      onChangeEmail={handleEmailChange}
+      onChangePassword={handlePasswordChenge}
+      onSubmit={handleSubmit}
+    />
+  );
 }
 
 export default Login;

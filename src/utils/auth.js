@@ -11,19 +11,10 @@ export const register = (email, password) => {
       password: password,
     }),
   })
-    .then((response) => {
-      try {
-        if (response.ok) {
-          return response.json();
-        }
-      } catch (e) {
-        return e;
-      }
-    })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => console.log(err));
+  .then((response) => {
+      return response.json()
+  })
+  .then((res) => {return res})
 };
 
 export const authorize = (email, password) => {
@@ -40,8 +31,16 @@ export const authorize = (email, password) => {
     .then((response) => {
       return response.json();
     })
-    .then((res) => console.log(res));
-};
+    .then((res) => {
+      if (res){
+        localStorage.setItem('token', res.token);
+        return res;
+      } else {
+        return;
+      }
+    })
+  };
+
 
 export const checkToken = (token) => {
   return fetch(`${BASE_URL}/users/me`, {

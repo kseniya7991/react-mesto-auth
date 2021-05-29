@@ -11,10 +11,12 @@ import HeaderLinkSignIn from './HeaderLinkSignIn';
 import HeaderLinkSignUp from './HeaderLinkSignUp';
 import HeaderLoggedIn from './HeaderLoggedIn';
 
+import { useHistory } from "react-router";
+
 import MainPage from './MainPage';
 import * as auth from '../utils/auth';
 
-auth.register("11122a2qsdswe@email.ru", "1112sd22aqsw333")
+/* auth.register("11122a2qsdswe@email.ru", "1112sd22aqsw333") */
 /* auth.register("111222333@email.ru", "111222333") */
 /* auth.register("111222@email.ru", "111222") */
 /* auth.authorize("111222@email.ru", "111222") */
@@ -23,14 +25,56 @@ auth.register("11122a2qsdswe@email.ru", "1112sd22aqsw333")
 function App() {
   const [loggedIn, setLoggetIn] = useState(false);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
+  const [statusInfoPopup, setStatusInfoPopup] = useState(false);
+  const [state, setState] = useState({});
+  const history = useHistory();
+  const [message, setMessage] = useState('');
 
-  function closeAllPopups() {
-    setIsInfoPopupOpen(false);
+  function closeInfoPopup() {
+    if(statusInfoPopup) {
+      setIsInfoPopupOpen(false);
+      history.push('/sign-in')
+    } else {
+      setIsInfoPopupOpen(false);
+    }
+  }
+
+  function handleSubmitRegister(email, password) {
+    auth.register(email, password)
+    .then((res) => {
+       if(!res.error) {
+        setStatusInfoPopup(true);
+        setIsInfoPopupOpen(true)
+      }  else {
+        setMessage(res.error)
+        setStatusInfoPopup(false);
+        setIsInfoPopupOpen(true);
+      } 
+    })
+    .catch((err) => {console.error(err)}
+    )
+  }
+
+  function handleSubmitLogin(email,password) {
+    auth.authorize(email, password)
+    .then((res) => {
+      console.log(res)
+      if (res.message){
+        setMessage(res.message)
+        setStatusInfoPopup(false);
+        setIsInfoPopupOpen(true);
+      }
+      if (res.token){
+        setLoggetIn(true)
+        history.push('/');
+        }
+    })
+    .catch((err) => console.log(err));
   }
 
   return (
     <div>
-      <InfoTooltip isOpen={isInfoPopupOpen} onClose={closeAllPopups} status={false} />
+      <InfoTooltip isOpen={isInfoPopupOpen} onClose={closeInfoPopup} status={statusInfoPopup} message={message}/>
       
       <Header>
         <Switch>
@@ -46,10 +90,10 @@ function App() {
 
       <Switch>
         <Route path="/sign-up">
-          <Register />
+          <Register onRegister={handleSubmitRegister}/>
         </Route>
         <Route path="/sign-in">
-          <Login />
+          <Login onLogin={handleSubmitLogin}/>
         </Route>
         <ProtectedRoute path="/" loggedIn={loggedIn} component={MainPage} />
         <Route exact path="/">
