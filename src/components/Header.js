@@ -25,7 +25,10 @@ function Header({ children, email, isLogged }) {
 
   return (
     <header className={`header ${isLogged ? ' header_with-menu' : ''}`}>
-      <Link className={`header__logo-link ${isLogged ? ' header__logo-link_with-menu' : ''}`} to="#" >
+      <Link
+        className={`header__logo-link ${isLogged ? ' header__logo-link_with-menu' : ''}`}
+        to="#"
+      >
         <img className="header__logo" src={logo} alt="место" title="место" />
 
         <button
@@ -35,7 +38,6 @@ function Header({ children, email, isLogged }) {
           `}
           onClick={handleCloseMenuBtn}
         ></button>
-
       </Link>
       <div
         className={`header__wrap-block 

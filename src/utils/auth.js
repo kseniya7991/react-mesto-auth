@@ -11,10 +11,12 @@ export const register = (email, password) => {
       password: password,
     }),
   })
-  .then((response) => {
-      return response.json()
-  })
-  .then((res) => {return res})
+    .then((response) => {
+      return response.json();
+    })
+    .then((res) => {
+      return res;
+    });
 };
 
 export const authorize = (email, password) => {
@@ -32,15 +34,14 @@ export const authorize = (email, password) => {
       return response.json();
     })
     .then((res) => {
-      if (res){
+      if (res) {
         localStorage.setItem('token', res.token);
         return res;
       } else {
         return;
       }
-    })
-  };
-
+    });
+};
 
 export const getContent = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
@@ -49,6 +50,5 @@ export const getContent = (token) => {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-  })
-    .then((res) => res.json())
+  }).then((res) => res.json());
 };

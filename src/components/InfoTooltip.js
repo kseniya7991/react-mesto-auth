@@ -19,5 +19,3 @@ function InfoTooltip({ isOpen, onClose, status, message }) {
 }
 
 export default InfoTooltip;
-/* 
-'Что-то пошло не так:( Попробуйте ещё раз!' */
