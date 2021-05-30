@@ -8,7 +8,7 @@ function HeaderSignOut({onSignOut}) {
   }
 
   return (
-    <Link className={`header__link`} onClick={handleSignOutClick}> 
+    <Link className={`header__link`}  to='' onClick={handleSignOutClick}> 
       Выйти
     </Link>
   );

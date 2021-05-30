@@ -2,9 +2,9 @@
     margin: 0 auto;
     margin-top: 60px;
     margin-bottom: 100px;
-    width: 360px;
+    width: max-content;
     position: relative;
-    height: 70vh;
+    height: 60vh;
 }
 
 

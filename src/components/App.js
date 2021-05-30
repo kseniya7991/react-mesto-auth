@@ -108,7 +108,7 @@ function App() {
     <div>
       <InfoTooltip isOpen={isInfoPopupOpen} onClose={closeInfoPopup} status={statusInfoPopup} message={message}/>
       
-      <Header email={userEmail}>
+      <Header email={userEmail} isLogged={loggedIn}>
         <Switch>
           <Route path="/sign-up">
           <HeaderLinkSignUp />
