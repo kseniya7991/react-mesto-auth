@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
 
 import Header from './Header';
 import Footer from './Footer';
@@ -7,8 +7,6 @@ import Login from './Login';
 import Register from './Register';
 import ProtectedRoute from './ProectedRoute';
 import InfoTooltip from './InfoTooltip';
-import HeaderLinkSignIn from './HeaderLinkSignIn';
-import HeaderLinkSignUp from './HeaderLinkSignUp';
 import HeaderSignOut from './HeaderSignOut';
 
 import { useHistory } from 'react-router';
@@ -108,14 +106,17 @@ function App() {
         message={message}
       />
 
-      
-        <Switch>
+      <Switch>
         <Header email={userEmail} isLogged={loggedIn}>
           <Route path="/sign-up">
-            <HeaderLinkSignUp />
+            <Link to="/sign-in" className={`header__link`}>
+              Войти
+            </Link>
           </Route>
           <Route path="/sign-in">
-            <HeaderLinkSignIn />
+            <Link to="/sign-up" className={`header__link`}>
+              Регистрация
+            </Link>
           </Route>
           <ProtectedRoute
             path="/"
@@ -123,9 +124,8 @@ function App() {
             component={HeaderSignOut}
             onSignOut={handleSignOut}
           />
-          </Header>
-        </Switch>
-      
+        </Header>
+      </Switch>
 
       <Switch>
         <Route path="/sign-up">

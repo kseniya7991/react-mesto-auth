@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import keyClose from '../utils/constants';
 
 function PopupWithForm({ title, name, children, isOpen, onClose, buttonValue, onSubmit}) {
-  /*   const [buttonValue, setButtonValue] = useState(buttonValue) */
+    const [buttonState, setButtonState] = useState(buttonValue)
 
 
     function handleOverlayClick(e) {
@@ -22,14 +22,9 @@ function PopupWithForm({ title, name, children, isOpen, onClose, buttonValue, on
         return () => document.removeEventListener('keydown', handleEscClick);
     }, [isOpen, onClose]);
 
-/*     function renderLoading(isLoading, loadingText) {
-        if (isLoading) {
-           = loadingText;
-        } else {
-          buttonTextActive = buttonTextDefault;
-        }
-      }
- */
+
+   
+
    
 
 
@@ -39,7 +34,7 @@ function PopupWithForm({ title, name, children, isOpen, onClose, buttonValue, on
                 <button type="reset" className="popup-close" aria-label="close" onClick={onClose}></button>
                 <h2 className={`popup__title popup__title_${name}`}>{title}</h2>
                 {children}
-                <button type="submit" formTarget="_self" className={`popup__save-button popup__save-button_${name}`} aria-label="save" value={buttonValue}>{buttonValue}</button>
+                <button type="submit" formTarget="_self" className={`popup__save-button popup__save-button_${name}`} aria-label="save" value={buttonState}>{buttonState}</button>
             </form>
         </section>
     );

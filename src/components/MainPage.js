@@ -62,19 +62,19 @@ function MainPage() {
   }
 
   function handleUpdateUser(name, about) {
-    return api
+    return  api
       .sendUser(name, about)
       .then((userData) => setCurrentUser(userData))
       .then(() => closeAllPopups())
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
   }
 
   function handleUpdateAvatar(avatar) {
     return api
       .updateAvatar(avatar)
       .then((userData) => setCurrentUser(userData))
-      .then(() => closeAllPopups())
-      .catch((err) => console.log(err));
+      .then(() => console.log('dfd'))
+      .catch((err) => console.log(err))
   }
 
   //Обработка лайка карточки
