@@ -97,7 +97,6 @@ function App() {
     localStorage.removeItem('token');
     setLoggedIn(false);
     setUserEmail('');
-    <Redirect to="/sign-in" />;
   }
 
   return (
@@ -109,8 +108,9 @@ function App() {
         message={message}
       />
 
-      <Header email={userEmail} isLogged={loggedIn}>
+      
         <Switch>
+        <Header email={userEmail} isLogged={loggedIn}>
           <Route path="/sign-up">
             <HeaderLinkSignUp />
           </Route>
@@ -123,8 +123,9 @@ function App() {
             component={HeaderSignOut}
             onSignOut={handleSignOut}
           />
+          </Header>
         </Switch>
-      </Header>
+      
 
       <Switch>
         <Route path="/sign-up">

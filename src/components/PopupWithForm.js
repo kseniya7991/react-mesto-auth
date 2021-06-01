@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import keyClose from '../utils/constants';
 
-function PopupWithForm({ title, name, children, isOpen, onClose, buttonValue, onSubmit , isEmpty}) {
+function PopupWithForm({ title, name, children, isOpen, onClose, buttonValue, onSubmit}) {
 
     function handleOverlayClick(e) {
         if (e.target.classList.contains('popup_opened')) {

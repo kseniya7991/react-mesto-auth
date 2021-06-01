@@ -8,15 +8,18 @@ function Header({ children, email, isLogged }) {
 
   //Определяем девайс через ширину экрана при монтировании элемента
   useEffect(() => {
+    function updateIsMobile() {
+      window.innerWidth > 560 ? setisMobile(false) : setisMobile(true);
+    }
+
     window.innerWidth > 560 ? setisMobile(false) : setisMobile(true);
+
+    window.addEventListener('resize', updateIsMobile);
+
+    return () => {
+      window.removeEventListener('resize', updateIsMobile);
+    };
   }, []);
-
-  //При каждом изменении ширины экрана обновляем стейт на девайс
-  window.addEventListener('resize', updateIsMobile);
-
-  function updateIsMobile() {
-    window.innerWidth > 560 ? setisMobile(false) : setisMobile(true);
-  }
 
   //Скрываем/раскрываем меню при клике на кнопку закрытия или гамбургера
   function handleCloseMenuBtn() {

@@ -6,19 +6,16 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
   const currentUser = React.useContext(CurrentUserContext);
   const avatarRef = React.useRef();
 
+  //Очистка формы при открытии попапа
   useEffect(() => {
-    if (currentUser) avatarRef.current.value = currentUser.avatar;
-  }, [currentUser, isOpen]);
+    avatarRef.current.value = '';
+  }, [isOpen]);
 
   function handleSubmit(e) {
     // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
     //Передаем данные аватара на сервер и обновляем аватар
     onUpdateAvatar(avatarRef.current.value);
-  }
-
-  function isEmpty() {
-    return avatarRef.current.value === '';
   }
 
   return (
@@ -29,7 +26,6 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
       onClose={onClose}
       buttonValue="Сохранить"
       onSubmit={handleSubmit}
-      isEmpty={isEmpty}
     >
       <section className="popup__input-section">
         <input
@@ -40,8 +36,6 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
           placeholder="Ссылка на фото"
           required
           ref={avatarRef}
-          dafaultvalue={currentUser.avatar || ''}
-          onChange={isEmpty}
         />
         <span className="popup__input-error" id="link-avatar-error"></span>
       </section>
