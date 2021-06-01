@@ -69,12 +69,17 @@ function MainPage() {
       .catch((err) => console.log(err))
   }
 
+function renderLoading (isLoading) {
+console.log('loading finished')
+}
+
   function handleUpdateAvatar(avatar) {
     return api
       .updateAvatar(avatar)
       .then((userData) => setCurrentUser(userData))
-      .then(() => console.log('dfd'))
+      .then(() => closeAllPopups())
       .catch((err) => console.log(err))
+      .then(renderLoading(true))
   }
 
   //Обработка лайка карточки
