@@ -29,6 +29,8 @@ function Register({ onRegister }) {
       onSubmit={handleSubmit}
       onChangeEmail={handleEmailChange}
       onChangePassword={handlePasswordChenge}
+      email={email}
+      password={password}
     />
   );
 }

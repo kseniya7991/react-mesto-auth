@@ -29,6 +29,8 @@ function Login({ onLogin }) {
       onChangeEmail={handleEmailChange}
       onChangePassword={handlePasswordChenge}
       onSubmit={handleSubmit}
+      email={email}
+      password={password}
     />
   );
 }

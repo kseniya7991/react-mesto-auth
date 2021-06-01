@@ -6,40 +6,34 @@ const handleResponse = (res) => {
 };
 
 class Api {
-  constructor({ token, groupID }) {
+  constructor({ token, groupID, baseUrl }) {
     this._token = token;
     this._groupID = groupID;
+    this._baseUrl = baseUrl;
   }
 
-
   getUser() {
-    return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/users/me`, {
+    return fetch(`${this._baseUrl}${this._groupID}/users/me`, {
       headers: {
         authorization: this._token,
         method: 'GET',
       },
     })
-      .then(handleResponse)
-      .catch((err) => {
-        console.log(err);
-      });
+    .then(handleResponse);
   }
 
   getCards() {
-    return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/cards`, {
+    return fetch(`${this._baseUrl}${this._groupID}/cards`, {
       method: 'GET',
       headers: {
         authorization: this._token,
       },
     })
-      .then(handleResponse)
-      .catch((err) => {
-        console.log(err);
-      });
+    .then(handleResponse);
   }
 
   sendUser({ name, about }) {
-    return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/users/me`, {
+    return fetch(`${this._baseUrl}${this._groupID}/users/me`, {
       method: 'PATCH',
       headers: {
         authorization: this._token,
@@ -50,14 +44,11 @@ class Api {
         about: about,
       }),
     })
-      .then(handleResponse)
-      .catch((err) => {
-        console.log(err);
-      });
+    .then(handleResponse);
   }
 
   addCard(newCard) {
-    return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/cards`, {
+    return fetch(`${this._baseUrl}${this._groupID}/cards`, {
       method: 'POST',
       headers: { authorization: this._token, 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -65,40 +56,31 @@ class Api {
         link: newCard.link,
       }),
     })
-      .then(handleResponse)
-      .catch((err) => {
-        console.log(err);
-      });
+    .then(handleResponse);
   }
 
   removeCard(idCard) {
-    return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/cards/${idCard}`, {
+    return fetch(`${this._baseUrl}${this._groupID}/cards/${idCard}`, {
       method: 'DELETE',
       headers: {
         authorization: this._token,
       },
     })
-      .then(handleResponse)
-      .catch((err) => {
-        console.log(err);
-      });
+    .then(handleResponse);
   }
 
   changeLikeCardStatus(idCard, isLiked) {
-    return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/cards/likes/${idCard}`, {
+    return fetch(`${this._baseUrl}${this._groupID}/cards/likes/${idCard}`, {
       method: !isLiked ? 'PUT' : 'DELETE',
       headers: {
         authorization: this._token,
       },
     })
-      .then(handleResponse)
-      .catch((err) => {
-        console.log(err);
-      });
+    .then(handleResponse);
   }
 
   updateAvatar(avatarLink) {
-    return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/users/me/avatar`, {
+    return fetch(`${this._baseUrl}${this._groupID}/users/me/avatar`, {
       method: 'PATCH',
       headers: {
         authorization: this._token,
@@ -108,16 +90,14 @@ class Api {
         avatar: avatarLink,
       }),
     })
-      .then(handleResponse)
-      .catch((err) => {
-        console.log(err);
-      });
+    .then(handleResponse);
   }
 }
 
 const api = new Api({
   token: '98ab6b78-4926-4ba2-b164-ff0669091526',
   groupID: 'cohort-22',
+  baseUrl: 'https://mesto.nomoreparties.co/v1/',
 });
 
 export default api;

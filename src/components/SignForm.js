@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import keyClose from '../utils/constants';
 import { Redirect, Link } from 'react-router-dom';
 
-function SignForm({ name, title, buttonValue, onSubmit, onChangeEmail, onChangePassword }) {
+function SignForm({ name, title, buttonValue, onSubmit, onChangeEmail, onChangePassword, email, password}) {
   return (
     <section className="sign">
       <form className="popup__form popup__form_sign" name={name} onSubmit={onSubmit}>
@@ -17,6 +17,7 @@ function SignForm({ name, title, buttonValue, onSubmit, onChangeEmail, onChangeP
               placeholder="Email"
               required
               onChange={onChangeEmail}
+              value={email}
             />
             <input
               className="popup__input popup__input_sign"
@@ -26,6 +27,7 @@ function SignForm({ name, title, buttonValue, onSubmit, onChangeEmail, onChangeP
               placeholder="Пароль"
               required
               onChange={onChangePassword}
+              value={password}
             />
           </section>
         </div>

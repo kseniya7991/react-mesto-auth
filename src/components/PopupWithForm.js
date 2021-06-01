@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import keyClose from '../utils/constants';
 
 function PopupWithForm({ title, name, children, isOpen, onClose, buttonValue, onSubmit}) {
+  /*   const [buttonValue, setButtonValue] = useState(buttonValue) */
+
 
     function handleOverlayClick(e) {
         if (e.target.classList.contains('popup_opened')) {
@@ -20,12 +22,20 @@ function PopupWithForm({ title, name, children, isOpen, onClose, buttonValue, on
         return () => document.removeEventListener('keydown', handleEscClick);
     }, [isOpen, onClose]);
 
-    
+/*     function renderLoading(isLoading, loadingText) {
+        if (isLoading) {
+           = loadingText;
+        } else {
+          buttonTextActive = buttonTextDefault;
+        }
+      }
+ */
+   
 
 
     return (
         <section className={`popup popup_${name} ${isOpen ? ' popup_opened' : ''}`} onClick={handleOverlayClick} >
-            <form className={`popup__form popup__form_${name}`} name="userProfileForm" noValidate onSubmit={onSubmit} >
+            <form className={`popup__form popup__form_${name}`} name={name} onSubmit={onSubmit} >
                 <button type="reset" className="popup-close" aria-label="close" onClick={onClose}></button>
                 <h2 className={`popup__title popup__title_${name}`}>{title}</h2>
                 {children}

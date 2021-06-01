@@ -36,6 +36,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
           placeholder="Ссылка на фото"
           required
           ref={avatarRef}
+          defaultValue={currentUser.avatar || ''} 
         />
         <span className="popup__input-error" id="link-avatar-error"></span>
       </section>
