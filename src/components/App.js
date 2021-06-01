@@ -30,7 +30,7 @@ function App() {
     if (loggedIn) {
       history.push('/');
     }
-  }, [loggedIn]);
+  }, [history, loggedIn]);
 
   function closeInfoPopup() {
     if (statusInfoPopup) {
