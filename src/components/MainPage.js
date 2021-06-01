@@ -73,7 +73,7 @@ function MainPage() {
     return api
       .updateAvatar(avatar)
       .then((userData) => setCurrentUser(userData))
-      .then(() => console.log('dfd'))
+      .then(() => closeAllPopups())
       .catch((err) => console.log(err))
   }
 
