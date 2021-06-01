@@ -61,6 +61,17 @@ function MainPage() {
     setSelectedCard(card);
   }
 
+  const [buttonLoading, setButtonLoading] = useState('')
+  
+  function renderLoading(isLoading) {
+    if (isLoading) {
+      setButtonLoading('Сохранение')
+    } else {
+      setButtonLoading('')
+    }
+    
+  }
+
   function handleUpdateUser(name, about) {
     return  api
       .sendUser(name, about)
@@ -70,11 +81,13 @@ function MainPage() {
   }
 
   function handleUpdateAvatar(avatar) {
+    renderLoading(true)
     return api
       .updateAvatar(avatar)
       .then((userData) => setCurrentUser(userData))
       .then(() => closeAllPopups())
       .catch((err) => console.log(err))
+      .finally(() => renderLoading(false))
   }
 
   //Обработка лайка карточки
@@ -152,6 +165,7 @@ function MainPage() {
                 isOpen={isEditAvatarPopupOpen}
                 onClose={closeAllPopups}
                 onUpdateAvatar={handleUpdateAvatar}
+                buttonLoading={buttonLoading}
               />
           
          </div>

@@ -1,12 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import keyClose from '../utils/constants';
 
-function PopupWithForm({ title, name, children, isOpen, onClose, buttonValue, onSubmit }) {
-  function handleOverlayClick(e) {
+function PopupWithForm({ title, name, children, isOpen, onClose, buttonValue, onSubmit, buttonLoading }) {
+    const [buttonValueTest, setButtonValueTest] = useState(buttonValue)
+  
+    function handleOverlayClick(e) {
     if (e.target.classList.contains('popup_opened')) {
       onClose();
     }
   }
+
+  useEffect(() => {
+    if(buttonLoading) {
+        setButtonValueTest(buttonLoading)
+    }
+  }, [buttonLoading])
 
   useEffect(() => {
     function handleEscClick(e) {
@@ -32,9 +40,9 @@ function PopupWithForm({ title, name, children, isOpen, onClose, buttonValue, on
           formTarget="_self"
           className={`popup__save-button popup__save-button_${name}`}
           aria-label="save"
-          value={buttonValue}
+          value={buttonValueTest}
         >
-          {buttonValue}
+          {buttonValueTest}
         </button>
       </form>
     </section>

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
-function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
+function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar , buttonLoading}) {
   const currentUser = React.useContext(CurrentUserContext);
   const avatarRef = React.useRef();
 
@@ -10,6 +10,8 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
   useEffect(() => {
     avatarRef.current.value = '';
   }, [isOpen]);
+
+
 
   function handleSubmit(e) {
     // Запрещаем браузеру переходить по адресу формы
@@ -25,7 +27,9 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
       isOpen={isOpen}
       onClose={onClose}
       buttonValue="Сохранить"
+      
       onSubmit={handleSubmit}
+      buttonLoading={buttonLoading}
     >
       <section className="popup__input-section">
         <input
