@@ -4,7 +4,7 @@ const handleResponse = (res) => {
   }
   return res.json();
 };
-
+//test
 class Api {
   constructor({ token, groupID, baseUrl }) {
     this._token = token;
