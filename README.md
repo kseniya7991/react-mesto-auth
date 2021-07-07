@@ -60,4 +60,4 @@
 
 1. Для проекта необходимо установить [webpack](https://webpack.js.org/guides/installation/) и [npm](https://docs.npmjs.com/cli/v7/commands/npm-install)
 2. `npm run build` собираем проект
-3. `npm run dev` запускаем проект на сервере **http://localhost:3000/**
+3. `npm run start` запускаем проект на сервере **http://localhost:3000/**
