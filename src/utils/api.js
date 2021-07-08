@@ -97,7 +97,7 @@ class Api {
 const api = new Api({
   token: '98ab6b78-4926-4ba2-b164-ff0669091526',
   groupID: 'cohort-22',
-  baseUrl: 'http://api.kst.mesto.nomoredomains.club'
+  baseUrl: 'https://api.kst.mesto.nomoredomains.club'
 });
 
 export default api;
