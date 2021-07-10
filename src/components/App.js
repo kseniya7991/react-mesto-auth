@@ -47,7 +47,7 @@ function App() {
       auth
         .getContent(token)
         .then((res) => {
-          const { _id, email } = res.data;
+          const { _id, email } = res.user;
           setUserEmail(email);
           setLoggedIn(true);
         })
