@@ -56,7 +56,7 @@ class Api {
         link: newCard.link,
       }),
     })
-    .then(handleResponse);
+    .then((res)=>{console.log(res.json())});
   }
 
   removeCard(idCard) {
