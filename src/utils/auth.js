@@ -36,6 +36,7 @@ export const authorize = (email, password) => {
     })
     .then((res) => {
       if (res) {
+        document.cookie = `token=${res.token}; max-age=604800`
         localStorage.setItem('token', res.token);
         return res;
       } else {
@@ -50,6 +51,7 @@ export const getContent = (token) => {
     headers: {
       'Content-Type': 'application/json',
       authorization: `Bearer ${token}`,
+
     },
   }).then((response) => {
     return response.json();

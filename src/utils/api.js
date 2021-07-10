@@ -93,7 +93,6 @@ class Api {
 }
 
 const api = new Api({
-  token: localStorage.getItem('token'),
   baseUrl: 'https://api.kst.mesto.nomoredomains.club'
 });
 
