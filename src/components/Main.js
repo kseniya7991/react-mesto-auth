@@ -48,7 +48,7 @@ function Main({
       <section className="photo-tape">
         <div className="photos-grid">
           {cards.map(({ ...card }) => (
-            <Card
+           <Card
               key={card.card._id}
               {...card}
               onCardClick={onCardClick}

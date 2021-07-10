@@ -17,6 +17,7 @@ function Card({ card, onCardClick, onCardLike, onCardDeleteBtn }) {
   }
 
   //Определяем, является ли текущий пользователь владельцем карточки
+  console.log('card:',card,'current:',currentUser._id)
   const isOwn = card.owner._id === currentUser._id;
 
   //Класс для отображения корзинки удаления карточки
