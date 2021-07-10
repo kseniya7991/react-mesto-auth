@@ -17,14 +17,13 @@ function Card({ card, onCardClick, onCardLike, onCardDeleteBtn }) {
   }
 
   //Определяем, является ли текущий пользователь владельцем карточки
-  console.log('card:',card,'current:',currentUser._id)
-  const isOwn = card.owner._id === currentUser._id;
+  const isOwn = card.owner === currentUser._id;
 
   //Класс для отображения корзинки удаления карточки
   const cardDeleteButtonClassName = `photo__delete ${isOwn ? '' : 'photo__delete_inactive'}`;
 
   // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
-  const isLiked = card.likes.some((i) => i._id === currentUser._id);
+  const isLiked = card.likes.some((userId) => userId === currentUser._id);
 
   // Создаём переменную, которую после зададим в `className` для кнопки лайка
   const cardLikeButtonClassName = `photo__like ${isLiked ? 'photo__like_active' : ''}`;

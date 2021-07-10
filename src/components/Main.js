@@ -13,7 +13,6 @@ function Main({
   onCardDeleteBtn,
 }) {
   const currentUser = React.useContext(CurrentUserContext);
-
   return (
     <main>
       <section className="profile">
@@ -49,7 +48,7 @@ function Main({
         <div className="photos-grid">
           {cards.map(({ ...card }) => (
            <Card
-              key={card.card._id}
+              key={card._id}
               {...card}
               onCardClick={onCardClick}
               onCardLike={onCardLike}

@@ -6,16 +6,14 @@ const handleResponse = (res) => {
 };
 
 class Api {
-  constructor({ token, groupID, baseUrl }) {
-    this._token = token;
-    this._groupID = groupID;
+  constructor({ baseUrl }) {
     this._baseUrl = baseUrl;
   }
 
   getUser() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: {
-        authorization: this._token,
+        authorization: localStorage.getItem('token'),
         method: 'GET',
       },
     })
@@ -26,7 +24,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'GET',
       headers: {
-        authorization: this._token,
+        authorization: localStorage.getItem('token'),
       },
     })
     .then(handleResponse);
@@ -36,7 +34,7 @@ class Api {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: {
-        authorization: this._token,
+        authorization: localStorage.getItem('token'),
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -50,20 +48,20 @@ class Api {
   addCard(newCard) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
-      headers: { authorization: this._token, 'Content-Type': 'application/json' },
+      headers: { authorization: localStorage.getItem('token'), 'Content-Type': 'application/json' },
       body: JSON.stringify({
         name: newCard.title,
         link: newCard.link,
       }),
     })
-    .then((res)=>{console.log(res.json())});
+    .then(handleResponse);
   }
 
   removeCard(idCard) {
     return fetch(`${this._baseUrl}/cards/${idCard}`, {
       method: 'DELETE',
       headers: {
-        authorization: this._token,
+        authorization: localStorage.getItem('token'),
       },
     })
     .then(handleResponse);
@@ -73,7 +71,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${idCard}/likes`, {
       method: !isLiked ? 'PUT' : 'DELETE',
       headers: {
-        authorization: this._token,
+        authorization: localStorage.getItem('token'),
       },
     })
     .then(handleResponse);
@@ -83,7 +81,7 @@ class Api {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: {
-        authorization: this._token,
+        authorization: localStorage.getItem('token'),
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -96,7 +94,6 @@ class Api {
 
 const api = new Api({
   token: localStorage.getItem('token'),
-  groupID: 'cohort-22',
   baseUrl: 'https://api.kst.mesto.nomoredomains.club'
 });
 

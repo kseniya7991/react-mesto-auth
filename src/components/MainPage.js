@@ -19,7 +19,7 @@ function MainPage() {
     Promise.all([api.getUser(), api.getCards()])
       .then(([userData, cardsData]) => {
         setCurrentUser(userData.user);
-        setCards(cardsData.map((card) => ({ card })));
+        setCards(cardsData.reverse().map((card) => ({ card })));
       })
       .catch((err) => console.log(err));
   }, []);
@@ -81,7 +81,7 @@ function MainPage() {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((cardUserId) => cardUserId === currentUser._id);
     // Отправляем запрос в API и получаем обновлённые данные карточки
 
     api
@@ -108,7 +108,7 @@ function MainPage() {
     return api
       .addCard(addedCard)
       .then((newCard) => {
-        setCards([{ card: newCard }, ...cards]);
+        setCards([newCard, ...cards]);
       })
       .then(() => closeAllPopups())
       .catch((err) => console.log(err));
