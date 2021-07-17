@@ -25,8 +25,22 @@ input::-moz-placeholder { color: #000; }
     }
 }
 
-/* @media screen and (max-width: 540px) {
-    .popup__input:last-of-type {
-      margin-bottom: 45px;
-    }
-} */
+
+.password-visibility{
+  background-image: url('../../../images/unvisible.png');
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-position-y: center;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  background-color: transparent;
+  position: absolute;
+  top: 13px;
+  right: 5px;
+}
+
+.password-visibility_on{
+  background-image: url('../../../images/visible.png');
+}
